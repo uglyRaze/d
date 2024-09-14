@@ -39,19 +39,15 @@
         let tg = window.Telegram.WebApp;
         let score = 0;
 
-        // Функция для обновления отображения счета
-        function updateScoreDisplay() {
-            document.getElementById('score').textContent = 'Счет: ' + score;
+        function updateScoreDisplay() {document.getElementById('score').textContent = 'Счет: ' + score;
         }
 
-        // Функция для увеличения счета и отправки его в Telegram
         function incrementScore() {
             score++;
             updateScoreDisplay();
             tg.sendData(JSON.stringify({action: 'update_score', score: score}));
         }
 
-        // Загрузка начального счета из initData
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             let userId = tg.initDataUnsafe.user.id;
             if (tg.initDataUnsafe.start_param) {
