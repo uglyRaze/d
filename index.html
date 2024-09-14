@@ -16,7 +16,7 @@
             background-image: url('https://i0.wp.com/lyricsgem.com/wp-content/uploads/2021/06/I-Am-The-Globglogabgalab-Lyrics.jpg');
             background-size: cover;
             background-position: center;
-            user-select: none; /* Added this to prevent text selection */
+            user-select: none; /* Prevent text selection */
         }
         #circle {
             width: 200px;
@@ -43,13 +43,23 @@
             text-align: center;
         }
         #score {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 48px; /* Increased font size */
+            font-weight: bold; /* Added bold font weight */
+            color: #fff; /* Changed text color to white */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added text shadow */
+            display: block;
+            text-align: center;
+            margin-bottom: 20px; /* Added margin bottom */
+            background: linear-gradient(to bottom, #ffd700, #ff9900); /* Added gradient background */
+            padding: 10px; /* Added padding */
+            border-radius: 10px; /* Added border radius */
         }
     </style>
 </head>
 <body>
-    <div id="score">Счет: 0</div>
+    <div id="score">
+        <span>Счет: <span id="score-value">0</span></span>
+    </div>
     <div id="circle" onclick="incrementScore()">
         <span>Кликни меня!</span>
     </div>
@@ -60,7 +70,7 @@
 
         // Функция для обновления отображения счета
         function updateScoreDisplay() {
-            document.getElementById('score').textContent = 'Счет: ' + score;
+            document.getElementById('score-value').textContent = score;
         }
 
         // Функция для увеличения счета и сохранения его в localStorage
