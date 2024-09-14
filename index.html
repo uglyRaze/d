@@ -155,14 +155,10 @@
         // Восстановление кликов каждые 3 секунды
         setInterval(recoverClicks, 3000);
 
-        // Установка таймера для скрытия загрузочного экрана
+        // Hide the loading screen after 3 seconds
         let loadingScreen = document.getElementById('loading-screen');
-        let startTime = new Date().getTime();
         setTimeout(() => {
-            let currentTime = new Date().getTime();
-            if (currentTime - startTime >= 3000) {
-                loadingScreen.style.display = 'none';
-            }
+            loadingScreen.style.display = 'none';
         }, 3000);
     </script>
 </body>
