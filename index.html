@@ -15,14 +15,21 @@
             font-family: Arial, sans-serif;
         }
         #circle {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             background-color: yellow;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        #circle img {
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            object-fit: cover;
         }
         #score {
             font-size: 24px;
@@ -32,7 +39,10 @@
 </head>
 <body>
     <div id="score">Счет: 0</div>
-    <div id="circle" onclick="incrementScore()">Кликни меня!</div>
+    <div id="circle" onclick="incrementScore()">
+        <img src="https://lyricsgem.com/wp-content/uploads/2020/09/i-am-the-globglogabgalab.jpg" alt="Globglogabgalab">
+        Кликни меня!
+    </div>
 
     <script>
         // Инициализация счета из localStorage или установка в 0, если он не установлен
