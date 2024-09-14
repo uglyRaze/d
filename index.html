@@ -1,178 +1,64 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кликер Игра</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://i0.wp.com/lyricsgem.com/wp-content/uploads/2021/06/I-Am-The-Globglogabgalab-Lyrics.jpg');
-            background-size: cover;
-            background-position: center;
-            user-select: none; /* Prevent text selection */
-        }
-        #circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            background: radial-gradient(farthest-corner at 50% 50%, #ffd700, #ff9900);
-            background-size: 200px 200px;
-            transition: transform 0.3s ease-in-out;
-        }
-        #circle:hover {
-            transform: scale(1.1);
-        }
-        #circle span {
-            font-size: 36px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: block;
-            text-align: center;
-        }
-        #score {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: block;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        #score-container {
-            padding: 10px;
-            border-radius: 10px;
-        }
-        #click-counter {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #loading-text {
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff0000;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: block;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .neon-text {
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5);
-        }
-        #loading-bar {
-            width: 80%;
-            height: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-        #loading-bar-fill {
-            width: 0%;
-            height: 100%;
-            background-color: #0000ff;
-            transition: width 5s ease-in-out;
-        }
-    </style>
-    <meta http-equiv="refresh" content="5;url=https://example.com">
-</head>
-<body>
-    <div id="loading-screen">
-        <div id="loading-text" class="neon-text">GlobCoin</div>
-        <div id="loading-bar">
-            <div id="loading-bar-fill"></div>
-        </div>
-    </div>
-    <div id="score-container">
-        <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div>
-    </div>
-    <div id="click-counter">Клики: <span id="click-count">500/500</span></div>
-    <div id="circle" onclick="incrementScore()">
-        <span>Кликни меня!</span>
-    </div>
 
-    <script>
-        // Инициализация счета из localStorage или установка в 0, если он не установлен
-        let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
+<html lang="ru"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Кликер Игра</title> <style> body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: Arial, sans-serif; background-image: url('https://i0.wp.com/lyricsgem.com/wp-content/uploads/2021/06/I-Am-The-Globglogabgalab-Lyrics.jpg'); background-size: cover; background-position: center; user-select: none; /* Prevent text selection */ } #circle { width: 200px; height: 200px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); background: radial-gradient(farthest-corner at 50% 50%, #ffd700, #ff9900); background-size: 200px 200px; transition: transform 0.3s ease-in-out; } #circle:hover { transform: scale(1.1); } #circle span { font-size: 36px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); display: block; text-align: center; } #score { font-size: 24px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); display: block; text-align: center; margin-bottom: 40px; } #score-container { padding: 10px; border-radius: 10px; } #click-counter { position: absolute; bottom: 10px; left: 10px; font-size: 18px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); } #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #000; display: flex; justify-content: center; align-items: center; z-index: 1000; } #loading-text { font-size: 48px; font-weight: bold; color: #ff0000; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); display: block; text-align: center; margin-bottom: 20px; } .neon-text { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5); } #loading-bar { width: 80%; height: 20px; border-radius: 10px; background-color: #fff; overflow: hidden; margin-top: 20px; } #loading-bar-fill { width: 0%; height: 100%; background-color: #0000ff; transition: width 5s ease-in-out; } </style> </head> <body> <div id="loading-screen"> <div id="loading-text" class="neon-text">GlobCoin</div> <div id="loading-bar"> <div id="loading-bar-fill"></div> </div> </div> <div id="score-container"> <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div> </div> <div id="click-counter">Клики: <span id="click-count">500/500</span></div> <div id="circle" onclick="incrementScore()"> <span>Кликни меня!</span> </div>
 
-        // Инициализация кликов из localStorage или установка в 500, если он не установлен
-        let clicks = localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 500;
+Verify
 
-        // Функция для обновления отображения счета
-        function updateScoreDisplay() {
-            document.getElementById('score-value').textContent = score;
-        }
+Open In Editor
+Edit
+Copy code
+<script>
+    // Инициализация счета из localStorage или установка в 0, если он не установлен
+    let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
-        // Функция для обновления отображения кликов
-        function updateClickCountDisplay() {
-            document.getElementById('click-count').textContent = `${clicks}/500`;
-        }
+    // Инициализация кликов из localStorage или установка в 500, если он не установлен
+    let clicks = localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 500;
 
-        // Функция для увеличения счета и сохранения его в localStorage
-        function incrementScore() {
-            if (clicks > 0) {
-                score++;
-                clicks--;
-                localStorage.setItem('score', score);
-                localStorage.setItem('clicks', clicks);
-                updateScoreDisplay();
-                updateClickCountDisplay();
-            }
-        }
+    // Функция для обновления отображения счета
+    function updateScoreDisplay() {
+        document.getElementById('score-value').textContent = score;
+    }
 
-        // Функция для восстановления кликов
-        function recoverClicks() {
-            clicks = Math.min(clicks + 1, 500);
+    // Функция для обновления отображения кликов
+    function updateClickCountDisplay() {
+        document.getElementById('click-count').textContent = `${clicks}/500`;
+    }
+
+    // Функция для увеличения счета и сохранения его в localStorage
+    function incrementScore() {
+        if (clicks > 0) {
+            score++;
+            clicks--;
+            localStorage.setItem('score', score);
             localStorage.setItem('clicks', clicks);
+            updateScoreDisplay();
             updateClickCountDisplay();
         }
+    }
 
-        // Обновление отображения счета при загрузке страницы
-        updateScoreDisplay();
+    // Функция для восстановления кликов
+    function recoverClicks() {
+        clicks = Math.min(clicks + 1, 500);
+        localStorage.setItem('clicks', clicks);
         updateClickCountDisplay();
+    }
 
-        // Восстановление кликов каждые 3 секунды
-        setInterval(recoverClicks, 3000);
+    // Обновление отображения счета при загрузке страницы
+    updateScoreDisplay();
+    updateClickCountDisplay();
 
-        // Загрузочный экран
-        let loadingBarFill = document.getElementById('loading-bar-fill');
-        let loadingScreen = document.getElementById('loading-screen');
-        loadingBarFill.style.width = '0%';
+    // Восстановление кликов каждые 3 секунды
+    setInterval(recoverClicks, 3000);
+
+    // Загрузочный экран
+    let loadingBarFill = document.getElementById('loading-bar-fill');
+    let loadingScreen = document.getElementById('loading-screen');
+    loadingBarFill.style.width = '0%';
+    setTimeout(() => {
+        loadingBarFill.style.width = '100%';
         setTimeout(() => {
-            loadingBarFill.style.width = '100%';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }, 5000);
-    </script>
-</body>
-</html>
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }, 5000);
+</script>
+</body> </html>
