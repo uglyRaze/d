@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -52,20 +51,16 @@ html
             tg.sendData(JSON.stringify({action: 'update_score', score: score}));
         }
 
-        // Запрос начального счета при загрузке страницы
-        tg.sendData(JSON.stringify({action: 'get_score'}));
-
-        // Обработчик входящих сообщений от бота
-        tg.onEvent('mainButtonClicked', function(){
-            let data = tg.initDataUnsafe.data;
-            if (data && data.score !== undefined) {
-                score = parseInt(data.score);
+        // Загрузка начального счета из initData
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            let userId = tg.initDataUnsafe.user.id;
+            if (tg.initDataUnsafe.start_param) {
+                score = parseInt(tg.initDataUnsafe.start_param) || 0;
                 updateScoreDisplay();
             }
-        });
+        }
 
         tg.expand();
-        tg.MainButton.setText("Загрузить счет").show();
     </script>
 </body>
 </html>
