@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -51,13 +52,20 @@
             tg.sendData(JSON.stringify({action: 'update_score', score: score}));
         }
 
-        // Получение начального счета от бота при загрузке страницы
+        // Запрос начального счета при загрузке страницы
+        tg.sendData(JSON.stringify({action: 'get_score'}));
+
+        // Обработчик входящих сообщений от бота
         tg.onEvent('mainButtonClicked', function(){
-            tg.sendData(JSON.stringify({action: 'get_score'}));
+            let data = tg.initDataUnsafe.data;
+            if (data && data.score !== undefined) {
+                score = parseInt(data.score);
+                updateScoreDisplay();
+            }
         });
 
         tg.expand();
-        tg.MainButton.setText("Получить счет").show();
+        tg.MainButton.setText("Загрузить счет").show();
     </script>
 </body>
 </html>
