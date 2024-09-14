@@ -44,16 +44,25 @@
         }
         #score {
             font-size: 24px;
-            font-weight: bold; /* Made the font bold again */
+            font-weight: bold;
             color: #fff;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: block;
             text-align: center;
-            margin-bottom: 40px; /* Increased margin bottom */
+            margin-bottom: 40px;
         }
         #score-container {
-            padding: 10px; /* Removed background and added padding */
-            border-radius: 10px; /* Removed box shadow */
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #click-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -61,6 +70,7 @@
     <div id="score-container">
         <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div>
     </div>
+    <div id="click-counter">Клики: <span id="click-count">500/500</span></div>
     <div id="circle" onclick="incrementScore()">
         <span>Кликни меня!</span>
     </div>
@@ -69,20 +79,44 @@
         // Инициализация счета из localStorage или установка в 0, если он не установлен
         let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
+        // Инициализация кликов из localStorage или установка в 500, если он не установлен
+        let clicks = localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 500;
+
         // Функция для обновления отображения счета
         function updateScoreDisplay() {
             document.getElementById('score-value').textContent = score;
         }
 
+        // Функция для обновления отображения кликов
+        function updateClickCountDisplay() {
+            document.getElementById('click-count').textContent = `${clicks}/500`;
+        }
+
         // Функция для увеличения счета и сохранения его в localStorage
         function incrementScore() {
-            score++;
-            localStorage.setItem('score', score);
-            updateScoreDisplay();
+            if (clicks > 0) {
+                score++;
+                clicks--;
+                localStorage.setItem('score', score);
+                localStorage.setItem('clicks', clicks);
+                updateScoreDisplay();
+                updateClickCountDisplay();
+            }
+        }
+
+        // Функция для восстановления кликов
+        function recoverClicks() {
+            clicks = Math.min(clicks + 1, 500);
+            localStorage.setItem('clicks', clicks);
+            updateClickCountDisplay();
         }
 
         // Обновление отображения счета при загрузке страницы
         updateScoreDisplay();
+        updateClickCountDisplay();
+
+        // Восстановление кликов каждые 3 секунды
+        setInterval(recoverClicks, 3000);
     </script>
 </body>
 </html>
