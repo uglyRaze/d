@@ -55,53 +55,9 @@
             padding: 10px;
             border-radius: 10px;
         }
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #loading-text {
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff0000;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: block;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .neon-text {
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5);
-        }
-        #loading-bar {
-            width: 80%;
-            height: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-        #loading-bar-fill {
-            width: 0%;
-            height: 100%;
-            background-color: #0000ff;
-            transition: width 3s ease-in-out;
-        }
     </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <div id="loading-text" class="neon-text">GlobCoin</div>
-        <div id="loading-bar">
-            <div id="loading-bar-fill"></div>
-        </div>
-    </div>
     <div id="score-container">
         <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div>
     </div>
@@ -137,3 +93,20 @@
                 updateClickCountDisplay();
             }
         }
+
+        // Функция для восстановления кликов
+        function recoverClicks() {
+            clicks = Math.min(clicks + 1, 500);
+            localStorage.setItem('clicks', clicks);
+            updateClickCountDisplay();
+        }
+
+        // Обновление отображения счета при загрузке страницы
+        updateScoreDisplay();
+        updateClickCountDisplay();
+
+        // Восстановление кликов каждые 3 секунды
+        setInterval(recoverClicks, 3000);
+    </script>
+</body>
+</html>
