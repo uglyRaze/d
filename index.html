@@ -44,7 +44,7 @@
         }
         #score {
             font-size: 24px;
-            font-weight: normal;
+            font-weight: bold; /* Made the font bold again */
             color: #fff;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: block;
@@ -59,7 +59,7 @@
 </head>
 <body>
     <div id="score-container">
-        <div id="score">Счет: <span id="score-value">0</span></div>
+        <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div>
     </div>
     <div id="circle" onclick="incrementScore()">
         <span>Кликни меня!</span>
