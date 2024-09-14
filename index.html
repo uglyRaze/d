@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кликер Игра</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             display: flex;
@@ -35,20 +36,30 @@
     <div id="circle" onclick="incrementScore()">Кликни меня!</div>
 
     <script>
-        // Инициализация счета из localStorage или установка в 0, если он не установлен
-        let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
+        let score = 0;
+        const tg = window.Telegram.WebApp;
 
         // Функция для обновления отображения счета
         function updateScoreDisplay() {
             document.getElementById('score').textContent = 'Счет: ' + score;
         }
 
-        // Функция для увеличения счета и сохранения его в localStorage
+        // Функция для увеличения счета и отправки данных в Telegram
         function incrementScore() {
             score++;
-            localStorage.setItem('score', score);
             updateScoreDisplay();
+            tg.sendData(JSON.stringify({action: 'updateScore', score: score}));
         }
+
+        // Запрашиваем текущий счет у бота при загрузке страницы
+        tg.expand();
+        tg.sendData(JSON.stringify({action: 'getScore'}));
+
+        // Обработчик входящих данных от бота
+        tg.onEvent('mainButtonClicked', function(){
+            const data = tg.initDataUnsafe.user;
+            // Здесь можно обработать полученные данные, если нужно
+        });
 
         // Обновление отображения счета при загрузке страницы
         updateScoreDisplay();
