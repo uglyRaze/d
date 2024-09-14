@@ -35,19 +35,23 @@
     <div id="circle" onclick="incrementScore()">Кликни меня!</div>
 
     <script>
-        let score = 0;
-        let userId = '<?php echo $_SESSION['user_id']; ?>'; // Получение user_id из сессии
+        // Инициализация счета из localStorage или установка в 0, если он не установлен
+        let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
+        // Функция для обновления отображения счета
+        function updateScoreDisplay() {
+            document.getElementById('score').textContent = 'Счет: ' + score;
+        }
+
+        // Функция для увеличения счета и сохранения его в localStorage
         function incrementScore() {
             score++;
-            document.getElementById('score').textContent = 'Счет: ' + score;
-
-            // Отправка запроса на сервер
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'score.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send('user_id=' + userId + '&score=' + score);
+            localStorage.setItem('score', score);
+            updateScoreDisplay();
         }
+
+        // Обновление отображения счета при загрузке страницы
+        updateScoreDisplay();
     </script>
 </body>
 </html>
