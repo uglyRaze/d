@@ -86,7 +86,7 @@
             border-radius: 50%;
             border: 5px solid #fff;
             border-top: 5px solid #ff0000;
-            animation: spin 3s linear infinite;
+            animation: spin 3s linear;
         }
         @keyframes spin {
             0% {
@@ -157,8 +157,12 @@
 
         // Установка таймера для скрытия загрузочного экрана
         let loadingScreen = document.getElementById('loading-screen');
+        let startTime = new Date().getTime();
         setTimeout(() => {
-            loadingScreen.style.display = 'none';
+            let currentTime = new Date().getTime();
+            if (currentTime - startTime >= 3000) {
+                loadingScreen.style.display = 'none';
+            }
         }, 3000);
     </script>
 </body>
