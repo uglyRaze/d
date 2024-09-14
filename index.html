@@ -137,31 +137,3 @@
                 updateClickCountDisplay();
             }
         }
-
-        // Функция для восстановления кликов
-        function recoverClicks() {
-            clicks = Math.min(clicks + 1, 500);
-            localStorage.setItem('clicks', clicks);
-            updateClickCountDisplay();
-        }
-
-        // Обновление отображения счета при загрузке страницы
-        updateScoreDisplay();
-        updateClickCountDisplay();
-
-        // Восстановление кликов каждые 3 секунды
-        setInterval(recoverClicks, 3000);
-
-        // Загрузочный экран
-        let loadingBarFill = document.getElementById('loading-bar-fill');
-        let loadingScreen = document.getElementById('loading-screen');
-        loadingBarFill.style.width = '0%';
-        setTimeout(() => {
-            loadingBarFill.style.width = '100%';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 0);
-        }, 3000);
-    </script>
-</body>
-</html>
