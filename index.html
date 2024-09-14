@@ -155,11 +155,14 @@
         // Восстановление кликов каждые 3 секунды
         setInterval(recoverClicks, 3000);
 
-        // Hide the loading screen after 3 seconds
+        // Hide the loading screen after 3 seconds with fade-out effect
         let loadingScreen = document.getElementById('loading-screen');
         setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 3000);
+            loadingScreen.style.opacity = 0; // fade out the loading screen
+            setTimeout(() => {
+                loadingScreen.style.display = 'none'; // hide the loading screen
+            }, 500); // wait for 0.5 seconds for the fade out to complete
+        }, 3000); // wait for 3 seconds before hiding the loading screen
     </script>
 </body>
 </html>
