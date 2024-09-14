@@ -43,22 +43,25 @@
             text-align: center;
         }
         #score {
-            font-size: 48px; /* Increased font size */
-            font-weight: bold; /* Added bold font weight */
-            color: #fff; /* Changed text color to white */
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added text shadow */
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: block;
             text-align: center;
-            margin-bottom: 20px; /* Added margin bottom */
-            background: linear-gradient(to bottom, #ffd700, #ff9900); /* Added gradient background */
+            margin-bottom: 40px; /* Increased margin bottom */
+        }
+        #score-container {
+            background: rgba(255, 255, 255, 0.2); /* Added semi-transparent background */
             padding: 10px; /* Added padding */
             border-radius: 10px; /* Added border radius */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added box shadow */
         }
     </style>
 </head>
 <body>
-    <div id="score">
-        <span>Счет: <span id="score-value">0</span></span>
+    <div id="score-container">
+        <div id="score">Счет: <span id="score-value">0</span></div>
     </div>
     <div id="circle" onclick="incrementScore()">
         <span>Кликни меня!</span>
