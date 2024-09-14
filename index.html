@@ -116,7 +116,7 @@
         <div id="score">Счет: <span id="score-value" style="font-size: 30px;">0</span></div>
     </div>
     <div id="click-count-container">
-        <div id="click-count">500/500</div>
+        <div id="click-count">Клики: <span id="click-count-value" style="font-size: 30px;">500/500</span></div>
     </div>
     <div id="circle" onclick="incrementScore()">
         <span>Кликни меня!</span>
@@ -136,7 +136,7 @@
 
         // Функция для обновления отображения кликов
         function updateClickCountDisplay() {
-            document.getElementById('click-count').textContent = `${clicks}/500`;
+            document.getElementById('click-count-value').textContent = `${clicks}/500`;
         }
 
         // Функция для увеличения счета и сохранения его в localStorage
