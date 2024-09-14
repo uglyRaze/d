@@ -36,9 +36,17 @@
 
     <script>
         let score = 0;
+        let userId = '<?php echo $_SESSION['user_id']; ?>'; // Получение user_id из сессии
+
         function incrementScore() {
             score++;
             document.getElementById('score').textContent = 'Счет: ' + score;
+
+            // Отправка запроса на сервер
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'score.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('user_id=' + userId + '&score=' + score);
         }
     </script>
 </body>
